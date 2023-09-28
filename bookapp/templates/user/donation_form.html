@@ -1,0 +1,35 @@
+{% extends "user/home_layout.html" %}
+
+{% block content %}
+<div class="content" style="background-color: white;padding:3em">
+{% with m =get_flashed_messages(with_categories=True)%}
+{{ m }}
+{% endwith%}
+    <form action="" method="post">
+        {{ donform.csrf_token }}
+        <h2>Donation Form: Thank you!</h2>
+        <p>Kindly complete the form below with the amount you want to donate. Click on the button and it will take you to a page where you will input your card details...</p>
+        <div class="mb-3">
+            <label>{{ donform.fullname.label }}</label>
+            {{ donform.fullname(class_='form-control border-success noround',value=deets.user_fullname)}}           
+        </div>
+        <div class="mb-3">
+            <label>{{ donform.email.label }}</label>
+            {{ donform.email(class_='form-control border-success noround',value=deets.user_email)}}
+        </div>
+        <div class="mb-3">
+            <label>{{ donform.amt.label }}</label>
+            {{ donform.amt(class_='form-control border-success noround')}}          
+        </div>
+        <div class="mb-3">
+            {{ donform.btnsubmit(class_='btn btn-lg btn-danger noround col-12') }} 
+                
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% block featured %}
+
+
+{% endblock %}

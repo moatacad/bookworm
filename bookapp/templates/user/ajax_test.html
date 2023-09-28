@@ -1,0 +1,63 @@
+{% extends "user/home_layout.html" %}
+
+{% block content%}
+
+<div class="content" style="background-color: white;padding:3em">
+    <div class="mb-3 border-primary" id="feedback">
+           <input type="text" class="form-control border-success noround" id="fullname">
+           <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token()}}">
+    </div>
+    
+    <div class="mb-3 border-primary" id="feedback">
+<button class="btn btn-danger noround" id="btn_name">Submit Name</button>
+<button class="btn btn-danger noround" id="btnload">Click Me</button>
+    </div>
+<div class="mb-3 border-primary" id="feedback"> {{ data }}</div>
+<div class="mb-3 border-primary" id="ajaxfeedback"></div>
+
+
+    <div class="row">
+        <div class="col">
+            <input type="text" id="email" class="form-control noround border-success">
+        </div>
+        <div class="col">
+            <button id="check" class="btn btn-warning noround" type="button">Check Availability</button>
+        </div>
+        <div class="col" id="avail"></div>
+    </div>
+    <!-- To DO: anytime I click on the button with id check, make an ajax call using .load to visit the route '/checkusername/', display the message from server inside the div with id, avail-->
+</div>
+
+{%endblock%}
+
+{% block customjs %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $("#check").click(function(){
+        var email = $("#email").val()
+        var data = "username="+email //this data will be available in the route as a get therefore , retreive as request.args.get('username')
+        $("#avail").load("/checkusername/",data, function(){
+            $(this).addClass("text-danger")
+        
+        })
+    })
+
+
+
+    $("#btn_name").click(function(){
+    fname = $('#fullname').val() 
+    csrf = $('#csrf_token').val()
+  
+    // data2send = "f="+fname //query string
+    data2send = {"f":fname,"csrf_token":csrf}    
+        $("#ajaxfeedback").load("/submission/",data2send,function(){ })
+    })
+
+    $("#btnload").click(function(){
+        $('#ajaxfeedback').load("/submission/")
+    })
+})
+</script>
+{%endblock%}

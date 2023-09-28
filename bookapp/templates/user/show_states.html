@@ -1,0 +1,37 @@
+{% extends "user/home_layout.html" %}
+ 
+{% block featured %}{% endblock %}
+{% block content %}
+<div class="content">
+<div class="row mb-3">
+    <div class="col">
+        <select name="state" id="state" class="form-control">
+            <option value="">Pls Select</option>
+                {% for s in states%}
+            <option value="{{s.state_id}}">
+                {{ s.state_name}}
+            </option>
+                {%endfor%}
+            </select>
+    </div>
+    <div class="col">
+        <div id='mylga'></div>
+    </div>
+    <div class="col-2">
+        <button class="btn btn-danger noround">Continue</button>
+    </div>
+</div>
+
+</div>
+{%endblock%}
+{% block customjs %}
+<script>
+$(document).ready(function(){
+$('#state').change(function(){
+    var selected_state = $(this).val()
+    var url = "/lga/"+selected_state
+    $('#mylga').load(url)
+})
+})
+</script>
+{%endblock%}

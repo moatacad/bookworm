@@ -1,0 +1,25 @@
+{% extends "user/home_layout.html"%}
+{% block content %}
+<div style="padding:3em; background-color: white;">
+    <table class="table table-responsive table-striped">
+<tr>
+<th>Serial</th>
+<th>Amount</th>
+<th>Status</th>
+</tr>
+{% for r in deets.mydonations%}
+<tr>
+    <td>{{ loop.index }}</td>
+    <td>{{ r.don_amt }}</td>
+    <td>{{ r.don_status}}</td>
+    </tr>
+{%endfor %}
+    </table>
+    
+    
+
+    
+
+</div>
+
+{%endblock%}

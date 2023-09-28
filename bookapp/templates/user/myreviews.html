@@ -1,0 +1,17 @@
+{% extends "user/home_layout.html"%}
+
+{% block content %}
+    <div id="content" style="background-color: white;padding:3em;">
+    <h3>My Reviews</h3>
+    {% for m in userdeets.user_reviews%}
+<div class="mb-3" style="font-family:'Courier New', Courier, monospace">
+    <h4><a href='/books/details/{{m.rev_bookid}}'>{{ m.rev_title}}</a></h4>
+    <p>{{ m.rev_text }}</p>
+    <p>{{ m.rev_date }}</p>
+</div>
+<hr>
+    {%endfor%}
+    
+    </div>
+
+{%endblock%}
